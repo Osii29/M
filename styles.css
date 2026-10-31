@@ -1,0 +1,282 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #f7f7f7;
+    padding: 20px 10px;
+}
+
+/* ==============================================================
+   CONTENEDOR PRINCIPAL Y CARRUSEL
+   ============================================================== */
+main {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
+.carousel-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+    max-width: 100%;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Ventana visible donde se muestran las diapositivas */
+.carousel-viewport {
+    width: 572px;
+    height: 720px;
+    overflow: hidden;
+    position: relative;
+    border-radius: 0;
+}
+
+/* Riel que se desplaza horizontalmente */
+.carousel-track {
+    display: flex;
+    height: 100%;
+    transition: transform 0.5s cubic-bezier(0.25, 1, 0.5, 1);
+    will-change: transform;
+}
+
+/* Regla para que todas las secciones del carrusel tengan el mismo ancho */
+.carousel-track > section {
+    flex: 0 0 572px;
+    width: 572px;
+    height: 720px;
+    flex-shrink: 0;
+    box-sizing: border-box;
+}
+
+/* ==============================================================
+   ESTILOS ORIGINALES DE LA CARTA (SIN MODIFICACIONES)
+   ============================================================== */
+#Carta {
+    background-image: url('img/image.png');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    font-family: 'Times New Roman', Times, serif;
+    /* Dimensiones exactas de la imagen (572px x 1024px) */
+    width: 572px;
+    height: 720px;
+    padding: 60px 50px;
+    
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+#Carta h2 {
+    margin-bottom: 20px;
+}
+
+#Carta p {
+    line-height: 1.6;
+    width: 100%;
+    text-align: left;
+}
+
+/* ==============================================================
+   PLANTILLA PARA NUEVAS SECCIONES DENTRO DEL CARRUSEL
+   ============================================================== */
+.carousel-section {
+    flex: 0 0 572px;
+    width: 572px;
+    height: 720px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+}
+
+.section-card {
+    width: 100%;
+    height: 100%;
+    background-color: #ffffff;
+    border-radius: 0;
+    padding: 50px 40px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+    border: 1px solid #ebd8dc;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    text-align: center;
+    overflow-y: auto;
+    gap: 18px;
+}
+
+.section-card h2 {
+    color: #ce3b5c;
+    font-size: 26px;
+    margin-bottom: 5px;
+}
+
+.section-card p {
+    font-size: 17px;
+    line-height: 1.6;
+    color: #444;
+}
+
+.card-placeholder {
+    width: 100%;
+    margin-top: 15px;
+    padding: 20px 15px;
+    background: #fff8f9;
+    border: 2px dashed #eec5ce;
+    border-radius: 10px;
+    color: #888;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+/* ==============================================================
+   FILA DE CANCIÓN: IMAGEN AL LADO DE TEXTO
+   ============================================================== */
+.cancion-item {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 16px;
+    width: 100%;
+    padding: 12px;
+    background: #ffffff;
+    border-radius: 12px;
+    border: 1px solid #ebd8dc;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.04);
+    text-align: left;
+    box-sizing: border-box;
+}
+
+.cancion-item img {
+    width: 110px;
+    height: 110px;
+    object-fit: cover;
+    border-radius: 10px;
+    flex-shrink: 0;
+    box-shadow: 0 4px 12px rgba(206, 59, 92, 0.25);
+}
+
+.cancion-texto {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 6px;
+    flex: 1;
+}
+
+.cancion-texto h3 {
+    font-size: 18px;
+    color: #ce3b5c;
+    margin: 0;
+}
+
+.cancion-texto p {
+    font-size: 14px;
+    line-height: 1.5;
+    color: #555;
+    margin: 0;
+}
+
+/* ==============================================================
+   BOTONES DE NAVEGACIÓN (JUNTOS)
+   ============================================================== */
+.carousel-controls {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    width: 100%;
+}
+
+.carousel-arrow {
+    background-color: #ffffff;
+    color: #ce3b5c;
+    border: 1px solid #ebd8dc;
+    width: 50px;
+    height: 50px;
+    border-radius: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    font-size: 22px;
+    transition: all 0.3s ease;
+    user-select: none;
+    flex-shrink: 0;
+}
+
+.carousel-arrow:hover {
+    background-color: #ce3b5c;
+    color: #ffffff;
+    transform: scale(1.1);
+    box-shadow: 0 6px 16px rgba(206, 59, 92, 0.35);
+}
+
+.carousel-arrow:active {
+    transform: scale(0.95);
+}
+
+/* ==============================================================
+   ADAPTABILIDAD RESPONSIVA (MÓVILES Y PANTALLAS PEQUEÑAS)
+   ============================================================== */
+@media (max-width: 680px) {
+    .carousel-controls {
+        flex-direction: row;
+        gap: 25px;
+        margin-top: 10px;
+    }
+
+    .carousel-viewport {
+        width: 95vw;
+        max-width: 95vw;
+        height: 680px;
+    }
+
+    .carousel-track > section,
+    .carousel-section,
+    #Carta {
+        flex: 0 0 95vw;
+        width: 95vw;
+        height: 680px; /* Misma altura fija */
+    }
+
+    #Carta {
+        padding: 40px 25px;
+        overflow-y: auto; /* Evita que el texto desborde la carta */
+    }
+
+    .cancion-item {
+        gap: 12px;
+        padding: 10px;
+    }
+
+    .cancion-item img {
+        width: 85px;
+        height: 85px;
+    }
+
+    .cancion-texto h3 {
+        font-size: 16px;
+    }
+
+    .cancion-texto p {
+        font-size: 13px;
+    }
+}
