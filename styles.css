@@ -145,6 +145,206 @@ main {
 }
 
 /* ==============================================================
+   SECCIÓN DE RECUERDOS: FOTOS CON GLOBO DE TEXTO EMERGENTE
+   ============================================================== */
+.recuerdos-subtitulo {
+    font-size: 14px !important;
+    color: #888 !important;
+    margin-top: -10px;
+    margin-bottom: 8px;
+}
+
+.recuerdos-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 22px;
+    width: 100%;
+}
+
+.foto-recuerdo {
+    position: relative;
+    width: 100%;
+    user-select: none;
+}
+
+.foto-wrapper {
+    position: relative;
+    width: 100%;
+    border-radius: 16px;
+    overflow: hidden;
+    cursor: pointer;
+    background: #ffffff;
+    border: 2px solid #ebd8dc;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.05);
+    transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+}
+
+.foto-recuerdo:hover .foto-wrapper,
+.foto-recuerdo.activo .foto-wrapper {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 22px rgba(206, 59, 92, 0.18);
+    border-color: #ce3b5c;
+}
+
+.foto-wrapper img {
+    width: 100%;
+    height: auto;
+    max-height: 380px;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.4s ease, filter 0.3s ease;
+}
+
+.foto-recuerdo:hover .foto-wrapper img {
+    transform: scale(1.02);
+}
+
+/* Badge indicador sobre la foto */
+.foto-badge {
+    position: absolute;
+    bottom: 12px;
+    right: 12px;
+    background: rgba(255, 255, 255, 0.94);
+    backdrop-filter: blur(6px);
+    border: 1px solid #ebd8dc;
+    border-radius: 20px;
+    padding: 6px 12px;
+    font-size: 12px;
+    color: #ce3b5c;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.12);
+    pointer-events: none;
+    transition: opacity 0.25s ease, transform 0.25s ease;
+    z-index: 5;
+}
+
+/* Ocultar badge cuando el globo está activo o en hover */
+.foto-recuerdo:hover .foto-badge,
+.foto-recuerdo.activo .foto-badge {
+    opacity: 0;
+    transform: translateY(6px);
+}
+
+/* ==============================================================
+   GLOBO DE TEXTO EMERGENTE (SPEECH BUBBLE)
+   ============================================================== */
+.globo-texto {
+    position: absolute;
+    bottom: 12px;
+    left: 50%;
+    transform: translateX(-50%) translateY(10px) scale(0.96);
+    width: calc(100% - 24px);
+    max-width: 440px;
+    background: #ffffff;
+    border: 2px solid #ce3b5c;
+    border-radius: 16px;
+    padding: 12px 14px;
+    box-shadow: 0 12px 30px rgba(206, 59, 92, 0.22), 0 4px 12px rgba(0, 0, 0, 0.1);
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transition: opacity 0.25s ease, transform 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.25), visibility 0.25s;
+    z-index: 25;
+    user-select: auto;
+}
+
+/* Piquito o flecha del globo de diálogo */
+.globo-flecha {
+    position: absolute;
+    top: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 0;
+    border-left: 9px solid transparent;
+    border-right: 9px solid transparent;
+    border-bottom: 9px solid #ce3b5c;
+}
+
+.globo-flecha::after {
+    content: '';
+    position: absolute;
+    top: 2px;
+    left: -7px;
+    width: 0;
+    height: 0;
+    border-left: 7px solid transparent;
+    border-right: 7px solid transparent;
+    border-bottom: 7px solid #ffffff;
+}
+
+/* Mostrar globo al pasar el mouse O al dar click (clase activo) */
+.foto-recuerdo:hover .globo-texto,
+.foto-recuerdo.activo .globo-texto {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+    transform: translateX(-50%) translateY(0) scale(1);
+}
+
+/* Cabecera del globo */
+.globo-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 8px;
+    padding-bottom: 4px;
+    border-bottom: 1px dashed #ebd8dc;
+}
+
+.globo-titulo {
+    font-size: 12px;
+    font-weight: 700;
+    color: #ce3b5c;
+    letter-spacing: 0.4px;
+    text-transform: uppercase;
+}
+
+.globo-cerrar {
+    background: transparent;
+    border: none;
+    color: #999;
+    font-size: 20px;
+    line-height: 1;
+    cursor: pointer;
+    padding: 0 4px;
+    border-radius: 4px;
+    transition: color 0.2s, background-color 0.2s;
+}
+
+.globo-cerrar:hover {
+    color: #ce3b5c;
+    background-color: #fff0f3;
+}
+
+/* Contenido del mensaje del recuerdo */
+.globo-contenido {
+    max-height: 160px;
+    overflow-y: auto;
+    padding: 2px;
+}
+
+.globo-contenido p {
+    font-size: 14px;
+    line-height: 1.55;
+    color: #444;
+    text-align: left;
+    margin: 0;
+}
+
+.globo-contenido::-webkit-scrollbar {
+    width: 4px;
+}
+
+.globo-contenido::-webkit-scrollbar-thumb {
+    background-color: #ebd8dc;
+    border-radius: 4px;
+}
+
+/* ==============================================================
    FILA DE CANCIÓN: IMAGEN AL LADO DE TEXTO
    ============================================================== */
 .cancion-item {
@@ -277,6 +477,24 @@ main {
     }
 
     .cancion-texto p {
+        font-size: 13px;
+    }
+
+    .recuerdos-grid {
+        gap: 16px;
+    }
+
+    .foto-wrapper img {
+        max-height: 280px;
+    }
+
+    .globo-texto {
+        width: calc(100% - 16px);
+        padding: 10px 12px;
+        bottom: 8px;
+    }
+
+    .globo-contenido p {
         font-size: 13px;
     }
 }
